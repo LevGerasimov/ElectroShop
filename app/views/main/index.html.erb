@@ -2,127 +2,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ElectroShop – DNS Style Demo</title>
-  <style>
-    * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
-    body { margin: 0; background: #f5f5f5; color: #222; }
-
-    /* Header */
-    header {
-      background: #1f9d55;
-      color: #fff;
-      padding: 12px 24px;
-    }
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
-    }
-    .search {
-      flex: 1;
-      margin: 0 20px;
-    }
-    .search input {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-    }
-    .actions {
-      font-size: 14px;
-    }
-
-    /* Navigation */
-    nav {
-      background: #ffffff;
-      border-bottom: 1px solid #ddd;
-    }
-    nav ul {
-      max-width: 1200px;
-      margin: auto;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-    nav li {
-      padding: 14px 0;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    /* Main */
-    main {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 0 16px;
-    }
-
-    .banner {
-      background: linear-gradient(90deg, #1f9d55, #34d399);
-      color: #fff;
-      padding: 40px;
-      border-radius: 8px;
-      margin-bottom: 30px;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card img {
-      max-width: 100%;
-      height: 140px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-    .card h3 {
-      font-size: 15px;
-      margin: 6px 0;
-    }
-    .price {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 8px 0;
-    }
-    .card button {
-      background: #1f9d55;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    /* Footer */
-    footer {
-      background: #222;
-      color: #ccc;
-      padding: 30px 20px;
-      margin-top: 40px;
-    }
-    .footer-inner {
-      max-width: 1200px;
-      margin: auto;
-      font-size: 14px;
-    }
-  </style>
 </head>
 <body>
 
@@ -132,7 +11,7 @@
     <div class="search">
       <input type="text" placeholder="Search products" />
     </div>
-    <div class="actions">Login | Cart</div>
+    <div class="actions">Login</div>
   </div>
 </header>
 
@@ -156,9 +35,22 @@
       телевизоры и бытовую технику по выгодным ценам. Мы предлагаем только проверенные бренды,
       быструю доставку и качественный сервис.
     </p>
-    <button style="background:#1f9d55; color:#fff; border:none; padding:14px 32px; font-size:16px; border-radius:6px; cursor:pointer;">
-      Начать покупку
-    </button>
+    <div data-controller="catalog">
+      <button 
+        style="background:#1f9d55; color:#fff; border:none; padding:14px 32px; font-size:16px; border-radius:6px; cursor:pointer;"
+        data-action="click->catalog#toggle"
+      >
+        Начать покупку
+      </button>
+  
+      <aside class="sidebar" data-catalog-target="menu">
+        <h2>Товары</h2>
+        <p>товар1</p>
+        <p>товар2</p>
+        <p>товар3</p>
+      </aside>
+    </div>
+    
   </section>
 </main>
 
@@ -167,7 +59,6 @@
     © 2026 ElectroShop · Not an internet-shop website 
   </div>
 </footer>
-
 
 
 </body>
