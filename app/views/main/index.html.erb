@@ -1,32 +1,9 @@
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ElectroShop – DNS Style Demo</title>
-</head>
-<body>
-
-<header>
-  <div class="top-bar">
-    <div class="logo">ElectroShop</div>
-    <div class="search">
-      <input type="text" placeholder="Search products" />
-    </div>
-    <div class="actions">Login</div>
-  </div>
-</header>
-
-<nav>
-  <ul>
-    <li>Catalog</li>
-    <li>Laptops</li>
-    <li>Smartphones</li>
-    <li>TVs</li>
-    <li>Appliances</li>
-    <li>Sales</li>
-  </ul>
-</nav>
+<% content_for :page_styles do %>
+  <%= stylesheet_link_tag "main", "data-turbo-track": "reload" %>
+<% end %>
 
 <main>
+
   <section style="background:#ffffff; padding:60px 40px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); text-align:center;">
     <h1 style="font-size:36px; margin-bottom:16px;">Добро пожаловать в ElectroShop</h1>
     <p style="font-size:18px; margin-bottom:12px;">Интернет-магазин современной электроники</p>
@@ -54,11 +31,4 @@
   </section>
 </main>
 
-<footer>
-  <div class="footer-inner">
-    © 2026 ElectroShop · Not an internet-shop website 
-  </div>
-</footer>
 
-
-</body>
