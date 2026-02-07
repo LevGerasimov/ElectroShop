@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get "contacts", to: "contacts#index", as: :contacts
+  get "products", to: "products#index", as: :products
+
+  # resources :products
   # get "contacts", to: "users#show"
   # get "main/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
