@@ -160,16 +160,16 @@
     
 
     <% @products.each do |product| %>
-    <div class="card" data-name="<%= product.name %>" data-price="<%= product.price %>">
-      <img src="https://via.placeholder.com/200x140" alt="<%= product.name %>" />
-      <h3><%= product.name %></h3>
-      <div class="price">$<%= product.price %></div>
-      <p> Количество: <%= product.quantity %> </p>
-        <p class="description"><%= product.description %>
-      </p>
-      <button>В корзину</button>
-    </div>
-    
+        <div class="card" data-name="<%= product.name %>" data-price="<%= product.price %>">
+            <% if product.image.attached? %>
+                <%= image_tag product.image, class: "product-image" %>
+            <% end %>
+            <h3><%= product.name %></h3>
+            <div class="price">$<%= product.price %></div>
+            <p> Количество: <%= product.quantity %> </p>
+            <p class="description"><%= product.description %> </p>
+            <button>В корзину</button>
+        </div>
     <% end %>
     </section>
 
