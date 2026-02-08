@@ -1,31 +1,21 @@
 
 
-<main>
+<% content_for(:page_styles) { %>
+  <%= stylesheet_link_tag "pages/main", "data-turbo-track": "reload" %>
+<% } %>
 
-  <section style="background:#ffffff; padding:60px 40px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); text-align:center;">
-    <h1 style="font-size:36px; margin-bottom:16px;">Добро пожаловать в ElectroShop</h1>
-    <p style="font-size:18px; margin-bottom:12px;">Интернет-магазин современной электроники</p>
-    <p style="font-size:16px; color:#555; max-width:700px; margin:0 auto 32px;">
+<main>
+  <section class="welcome-section">
+    <h1>Добро пожаловать в ElectroShop</h1>
+    <p>Интернет-магазин современной электроники</p>
+    <p>
       ElectroShop — это удобный онлайн-магазин, где вы можете купить ноутбуки, смартфоны,
       телевизоры и бытовую технику по выгодным ценам. Мы предлагаем только проверенные бренды,
       быструю доставку и качественный сервис.
     </p>
-    <div data-controller="catalog">
-      <button 
-        style="background:#1f9d55; color:#fff; border:none; padding:14px 32px; font-size:16px; border-radius:6px; cursor:pointer;"
-        data-action="click->catalog#toggle"
-      >
-        Начать покупку
-      </button>
-  
-      <aside class="sidebar" data-catalog-target="menu">
-        <h2>Товары</h2>
-        <p>товар1</p>
-        <p>товар2</p>
-        <p>товар3</p>
-      </aside>
-    </div>
-    
+    <button data-action="click->catalog#toggle">
+      Начать покупку
+    </button>
   </section>
 </main>
 

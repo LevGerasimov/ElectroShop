@@ -4,13 +4,17 @@
     <div class="search">
       <input type="text" placeholder="Search products" />
     </div>
-    <div class="actions">Login</div>
+    <% if user_signed_in? %>
+  <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete } %>
+<% else %>
+  <%= link_to "Войти", new_user_session_path %> |
+  <%= link_to "Регистрация", new_user_registration_path %>
+<% end %>
   </div>
 </header>
-
 <nav>
   <ul>
-    <li>Catalog</li>
+    <li><button style="background:none; border:none; cursor:pointer; color:inherit; font:inherit; padding:0;" data-action="click->catalog#toggle">Catalog</button></li>
     <li>Laptops</li>
     <li>Smartphones</li>
     <li>TVs</li>

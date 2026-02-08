@@ -19,12 +19,14 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "shared", "data-turbo-track": "reload" %>
     <%= yield :page_styles %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="catalog">
     <%= render "shared/header" %>
+    <%= render "shared/sidebar" %>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>
