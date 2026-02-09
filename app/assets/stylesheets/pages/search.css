@@ -28,7 +28,6 @@ main {
   color: #1f9d55;
 }
 
-/* Empty State */
 .empty-state {
   background: #f9f9f9;
   border: 2px dashed #ddd;
@@ -46,6 +45,26 @@ main {
 .empty-state .btn {
   display: inline-block;
   margin-top: 16px;
+  background: #1f9d55;
+  color: white;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.empty-state .btn:hover {
+  background: #176b3f;
+}
+
+.empty-state a.btn {
+  color: white !important;
+}
+
+.empty-state a.btn:hover {
+  color: white !important;
+  background: #176b3f;
 }
 
 /* Search Results */
@@ -242,9 +261,9 @@ main {
   background: #176b3f;
   transform: translateY(-2px);
 }
-
 .btn-primary {
   background: #1f9d55;
+  color: white;
 }
 
 .btn-primary:hover {
