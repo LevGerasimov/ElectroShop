@@ -27,6 +27,8 @@
   <body data-controller="catalog">
     <%= render "shared/header" %>
     <%= render "shared/sidebar" %>
+    <div class="sidebar-overlay" data-action="click->catalog#closeMenu">
+    </div>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>

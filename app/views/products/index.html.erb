@@ -8,20 +8,23 @@
   </section>
 
   <div class="products-container">
-    <section class="products" id="products">
-      <% @products.each do |product| %>
-        <div class="card" data-name="<%= product.name %>" data-price="<%= product.price %>">
-          <% if product.image.attached? %>
-            <%= image_tag product.image, class: "product-image" %>
-          <% end %>
-          <h3><%= product.name %></h3>
-          <div class="price">$<%= product.price %></div>
-          <p>Количество: <%= product.quantity %></p>
-          <p class="description"><%= product.description %></p>
-          <button>В корзину</button>
-        </div>
-      <% end %>
-    </section>
+    <%= turbo_frame_tag "products-list" do %>
+      <section class="products" id="products">
+        <% @products.each do |product| %>
+          <div class="card" data-name="<%= product.name %>" data-price="<%= product.price %>" data-category="<%= product.category_id %>">
+            <% if product.image.attached? %>
+              <%= image_tag product.image, class: "product-image" %>
+            <% end %>
+            <h3><%= product.name %></h3>
+            <span class="category-badge"><%= product.category&.name %></span>
+            <div class="price">$<%= product.price %></div>
+            <p>Количество: <%= product.quantity %></p>
+            <p class="description"><%= product.description %></p>
+            <button>В корзину</button>
+          </div>
+        <% end %>
+      </section>
+    <% end %>
 
     <aside class="products-sidebar">
       <h3>Сортировка</h3>
@@ -32,11 +35,49 @@
         <option value="name-asc">Название: А–Я</option>
         <option value="name-desc">Название: Я–А</option>
       </select>
+
+      <h3>Категории</h3>
+      <div class="categories-list">
+        <button 
+          class="category-btn <%= 'active' if params[:category_id].blank? %>"
+          onclick="filterByCategory(null)"
+          data-category="all">
+          Все товары
+        </button>
+        
+        <% @categories.each do |category| %>
+          <button 
+            class="category-btn <%= 'active' if params[:category_id] == category.id.to_s %>"
+            onclick="filterByCategory(<%= category.id %>)"
+            data-category="<%= category.id %>">
+            <%= category.name %> (<%= category.products.count %>)
+          </button>
+        <% end %>
+      </div>
     </aside>
   </div>
 </main>
 
 <script>
+  function filterByCategory(categoryId) {
+    const buttons = document.querySelectorAll('.category-btn');
+    
+    // Обновляем активную кнопку
+    buttons.forEach(btn => {
+      const btnCategory = btn.dataset.category;
+      if ((categoryId === null && btnCategory === 'all') || 
+          (categoryId !== null && btnCategory === categoryId.toString())) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    // Переходим по URL с параметром категории
+    const url = categoryId ? `/products?category_id=${categoryId}` : '/products';
+    Turbo.visit(url, { action: 'replace' });
+  }
+
   function sortProducts() {
     const container = document.getElementById('products');
     const cards = Array.from(container.children);

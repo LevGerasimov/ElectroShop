@@ -3,7 +3,12 @@ class ProductsController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @products = Product.all
+        @categories = Category.all
+        @products = if params[:category_id].present?
+                      Product.where(category_id: params[:category_id]).includes(:category)
+                    else
+                      Product.includes(:category)
+                    end
     end
 
     def show
