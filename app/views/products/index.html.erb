@@ -2,14 +2,14 @@
   <%= stylesheet_link_tag "pages/products", "data-turbo-track": "reload" %>
 <% } %>
 
-<main>
+<main data-controller="products">
   <section class="products-header">
     <h1>Каталог товаров</h1>
   </section>
 
   <div class="products-container">
     <%= turbo_frame_tag "products-list" do %>
-      <section class="products" id="products">
+      <section class="products" id="products" data-products-target="productsContainer">
         <% @products.each do |product| %>
           <div class="card" data-name="<%= product.name %>" data-price="<%= product.price %>" data-category="<%= product.category_id %>">
             <% if product.image.attached? %>
@@ -28,7 +28,7 @@
 
     <aside class="products-sidebar">
       <h3>Сортировка</h3>
-      <select id="sort" onchange="sortProducts()">
+      <select id="sort" data-action="change->products#sort">
         <option value="default">По умолчанию</option>
         <option value="price-asc">Цена: по возрастанию</option>
         <option value="price-desc">Цена: по убыванию</option>
@@ -38,67 +38,12 @@
 
       <h3>Категории</h3>
       <div class="categories-list">
-        <button 
-          class="category-btn <%= 'active' if params[:category_id].blank? %>"
-          onclick="filterByCategory(null)"
-          data-category="all">
-          Все товары
-        </button>
+        <%= link_to "Все товары", products_path, class: "category-btn #{'active' if params[:category_id].blank?}", data: { turbo_frame: "products-list" } %>
         
         <% @categories.each do |category| %>
-          <button 
-            class="category-btn <%= 'active' if params[:category_id] == category.id.to_s %>"
-            onclick="filterByCategory(<%= category.id %>)"
-            data-category="<%= category.id %>">
-            <%= category.name %> (<%= category.products.count %>)
-          </button>
+          <%= link_to "#{category.name} (#{category.products.count})", products_path(category_id: category.id), class: "category-btn #{'active' if params[:category_id] == category.id.to_s}", data: { turbo_frame: "products-list" } %>
         <% end %>
       </div>
     </aside>
   </div>
 </main>
-
-<script>
-  function filterByCategory(categoryId) {
-    const buttons = document.querySelectorAll('.category-btn');
-    
-    // Обновляем активную кнопку
-    buttons.forEach(btn => {
-      const btnCategory = btn.dataset.category;
-      if ((categoryId === null && btnCategory === 'all') || 
-          (categoryId !== null && btnCategory === categoryId.toString())) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-
-    // Переходим по URL с параметром категории
-    const url = categoryId ? `/products?category_id=${categoryId}` : '/products';
-    Turbo.visit(url, { action: 'replace' });
-  }
-
-  function sortProducts() {
-    const container = document.getElementById('products');
-    const cards = Array.from(container.children);
-    const sortValue = document.getElementById('sort').value;
-
-    let sortedCards = [...cards];
-
-    if (sortValue === 'price-asc') {
-      sortedCards.sort((a, b) => a.dataset.price - b.dataset.price);
-    }
-    if (sortValue === 'price-desc') {
-      sortedCards.sort((a, b) => b.dataset.price - a.dataset.price);
-    }
-    if (sortValue === 'name-asc') {
-      sortedCards.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
-    }
-    if (sortValue === 'name-desc') {
-      sortedCards.sort((a, b) => b.dataset.name.localeCompare(a.dataset.name));
-    }
-
-    container.innerHTML = '';
-    sortedCards.forEach(card => container.appendChild(card));
-  }
-</script>

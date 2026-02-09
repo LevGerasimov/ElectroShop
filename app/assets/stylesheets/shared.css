@@ -97,6 +97,19 @@ footer {
   color: #1f9d55;
 }
 
+.nav-link-admin {
+  background: #ff9800;
+  color: white !important;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.nav-link-admin:hover {
+  background: #e68900;
+  color: white !important;
+}
+
 /* Sidebar */
 .sidebar {
   position: fixed;

@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   get "contacts", to: "contacts#index", as: :contacts
   get "products", to: "products#index", as: :products
 
+  # Admin namespace
+  namespace :admin do
+    resources :products
+    resources :categories
+    root "products#index"
+  end
+
   # resources :products
   # get "contacts", to: "users#show"
   # get "main/index"
