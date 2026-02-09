@@ -2,7 +2,10 @@
   <div class="top-bar">
     <div class="logo">ElectroShop</div>
     <div class="search">
-      <input type="text" placeholder="Search products" />
+      <%= form_with url: search_path, method: :get, local: true, class: "search-form" do |f| %>
+        <%= f.text_field :q, placeholder: "Поиск товаров и категорий...", class: "search-input" %>
+        <%= f.submit "Поиск", class: "search-btn" %>
+      <% end %>
     </div>
     <% if user_signed_in? %>
   <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
