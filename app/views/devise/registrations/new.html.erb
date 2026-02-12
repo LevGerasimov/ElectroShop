@@ -1,0 +1,26 @@
+<section class="auth-card">
+  <h1>Регистрация</h1>
+
+  <%= form_with model: resource,
+                as: resource_name,
+                url: registration_path(resource_name),
+                local: true do |f| %>
+
+    <div class="field">
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, "Пароль" %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, "Повторите пароль" %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <%= f.submit "Зарегистрироваться", class: "btn-primary" %>
+  <% end %>
+</section>

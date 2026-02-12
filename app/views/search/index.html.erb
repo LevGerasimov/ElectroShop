@@ -1,0 +1,71 @@
+<% content_for(:page_styles) { %>
+  <%= stylesheet_link_tag "pages/search", "data-turbo-track": "reload" %>
+<% } %>
+
+<main>
+  <section class="search-header">
+    <h1>Результаты поиска</h1>
+    <p class="search-query">
+      <% if @query.present? %>
+        По запросу: <strong>"<%= @query %>"</strong>
+      <% else %>
+        Введите поисковый запрос
+      <% end %>
+    </p>
+  </section>
+
+  <% if @query.blank? %>
+    <div class="empty-state">
+      <p>Используйте поисковую строку в шапке сайта для поиска товаров и категорий.</p>
+    </div>
+  <% elsif @products.empty? && @categories.empty? %>
+    <div class="empty-state">
+      <p>Ничего не найдено по запросу "<%= @query %>"</p>
+      <p><%= link_to "Вернуться к товарам", products_path, class: "btn btn-primary" %></p>
+    </div>
+  <% else %>
+    <div class="search-results">
+      <!-- Categories Results -->
+      <% if @categories.any? %>
+        <section class="results-section categories-section">
+          <h2>Категории (<%= @categories.count %>)</h2>
+          <div class="categories-grid">
+            <% @categories.each do |category| %>
+              <div class="category-card">
+                <h3><%= link_to category.name, products_path(category_id: category.id) %></h3>
+                <p class="category-count">Товаров: <strong><%= category.products.count %></strong></p>
+              </div>
+            <% end %>
+          </div>
+        </section>
+      <% end %>
+
+      <!-- Products Results -->
+      <% if @products.any? %>
+        <section class="results-section products-section">
+          <h2>Товары (<%= @products.count %>)</h2>
+          <div class="products-grid">
+            <% @products.each do |product| %>
+              <div class="product-card">
+                <% if product.image.attached? %>
+                  <%= image_tag product.image, class: "product-image" %>
+                <% else %>
+                  <div class="product-image-placeholder">Нет изображения</div>
+                <% end %>
+                <h3><%= link_to product.name, products_path(category_id: product.category_id) %></h3>
+                <% if product.category %>
+                  <p class="product-category"><%= product.category.name %></p>
+                <% end %>
+                <p class="product-price">$<%= product.price %></p>
+                <p class="product-description"><%= truncate(product.description, length: 100) %></p>
+                <div class="product-meta">
+                  <span class="quantity">В наличии: <%= product.quantity %></span>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </section>
+      <% end %>
+    </div>
+  <% end %>
+</main>

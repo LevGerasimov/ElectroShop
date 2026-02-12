@@ -1,0 +1,20 @@
+<section class="auth-card">
+  <h1>Вход</h1>
+
+  <%= form_with scope: :user,
+                url: user_session_path,
+                local: true do |f| %>
+
+    <div class="field">
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, "Пароль" %>
+      <%= f.password_field :password %>
+    </div>
+
+    <%= f.submit "Войти", class: "btn-primary" %>
+  <% end %>
+</section>

@@ -1,0 +1,22 @@
+
+
+<% content_for(:page_styles) { %>
+  <%= stylesheet_link_tag "pages/main", "data-turbo-track": "reload" %>
+<% } %>
+
+<main>
+  <section class="welcome-section">
+    <h1>Добро пожаловать в ElectroShop</h1>
+    <p>Интернет-магазин современной электроники</p>
+    <p>
+      ElectroShop — это удобный онлайн-магазин, где вы можете купить ноутбуки, смартфоны,
+      телевизоры и бытовую технику по выгодным ценам. Мы предлагаем только проверенные бренды,
+      быструю доставку и качественный сервис.
+    </p>
+    <button data-action="click->catalog#toggle">
+      Начать покупку
+    </button>
+  </section>
+</main>
+
+

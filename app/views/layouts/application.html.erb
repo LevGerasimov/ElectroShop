@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Weba1 Ro R Hotwire" %></title>
+    <title><%= content_for(:title) || "ElectroShop" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -19,10 +19,17 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "shared", "data-turbo-track": "reload" %>
+    <%= yield :page_styles %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="catalog">
+    <%= render "shared/header" %>
+    <%= render "shared/sidebar" %>
+    <div class="sidebar-overlay" data-action="click->catalog#closeMenu">
+    </div>
     <%= yield %>
+    <%= render "shared/footer" %>
   </body>
 </html>

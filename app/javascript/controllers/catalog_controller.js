@@ -1,0 +1,15 @@
+import { Controller } from "@hotwired/stimulus"
+
+// Connects to data-controller="catalog"
+export default class extends Controller {
+  static targets = ["menu"]
+
+  toggle() {
+    this.menuTarget.classList.toggle("active")
+  }
+
+  closeMenu() {
+    this.menuTarget.classList.remove("active")
+  }
+}
+

@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  devise_for :users
+  get "contacts", to: "contacts#index", as: :contacts
+  get "products", to: "products#index", as: :products
+  get "search", to: "search#index", as: :search
+
+  # Admin namespace
+  namespace :admin do
+    resources :products
+    resources :categories
+    root "products#index"
+  end
+
+  # resources :products
+  # get "contacts", to: "users#show"
+  # get "main/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,4 +26,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "main#index"
 end

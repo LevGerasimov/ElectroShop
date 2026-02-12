@@ -1,0 +1,13 @@
+<% content_for(:page_styles) { %>
+  <%= stylesheet_link_tag "pages/admin", "data-turbo-track": "reload" %>
+<% } %>
+
+<%= render "shared/admin_nav" %>
+
+<main>
+  <section class="admin-header">
+    <h1>Редактировать товар: <%= @product.name %></h1>
+  </section>
+
+  <%= render "form" %>
+</main>

@@ -1,0 +1,43 @@
+<% content_for(:page_styles) { %>
+  <%= stylesheet_link_tag "pages/admin", "data-turbo-track": "reload" %>
+<% } %>
+
+<%= render "shared/admin_nav" %>
+
+<main>
+  <section class="admin-header">
+    <h1><%= @category.name %></h1>
+    <div class="btn-group">
+      <%= link_to "Редактировать", edit_admin_category_path(@category), class: "btn btn-warning" %>
+      <%= link_to "Удалить", admin_category_path(@category), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Вы уверены?" }, class: "btn btn-danger" %>
+      <%= link_to "Назад", admin_categories_path, class: "btn btn-secondary" %>
+    </div>
+  </section>
+
+  <div class="product-details">
+    <div class="detail-row">
+      <div class="detail-label">Название:</div>
+      <div class="detail-value"><%= @category.name %></div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-label">Товаров в категории:</div>
+      <div class="detail-value"><strong><%= @products_count %></strong></div>
+    </div>
+
+    <% if @category.products.any? %>
+      <div class="detail-row">
+        <div class="detail-label">Товары:</div>
+        <div class="detail-value">
+          <ul class="products-list">
+            <% @category.products.each do |product| %>
+              <li>
+                <%= link_to product.name, admin_product_path(product) %> - $<%= product.price %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>

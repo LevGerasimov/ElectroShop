@@ -1,0 +1,53 @@
+<% content_for(:page_styles) { %>
+  <%= stylesheet_link_tag "pages/admin", "data-turbo-track": "reload" %>
+<% } %>
+
+<%= render "shared/admin_nav" %>
+
+<main>
+  <section class="admin-header">
+    <h1>Управление товарами</h1>
+    <%= link_to "Добавить товар", new_admin_product_path, class: "btn btn-primary" %>
+  </section>
+
+  <% if notice %>
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <div class="admin-products-table">
+    <% if @products.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Название</th>
+            <th>Категория</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td><strong><%= product.name %></strong></td>
+              <td><%= product.category&.name || "Без категории" %></td>
+              <td class="price">$<%= product.price %></td>
+              <td><%= product.quantity %></td>
+              <td class="actions">
+                <%= link_to "Просмотр", admin_product_path(product), class: "btn btn-info" %>
+                <%= link_to "Редактировать", edit_admin_product_path(product), class: "btn btn-warning" %>
+                <%= link_to "Удалить", admin_product_path(product), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Вы уверены?" }, class: "btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="empty-state">
+        <p>Нет товаров. <%= link_to "Добавить первый товар", new_admin_product_path %></p>
+      </div>
+    <% end %>
+  </div>
+</main>
