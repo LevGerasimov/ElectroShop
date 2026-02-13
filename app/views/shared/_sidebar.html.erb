@@ -1,5 +1,5 @@
 <aside class="sidebar" data-catalog-target="menu">
-  <h2>Категории</h2>
+  <h2>Categories</h2>
   <nav class="sidebar-categories">
     <% sidebar_categories.each do |category| %>
       <%= link_to category.name, products_path(category_id: category.id), class: "sidebar-link", data: { action: "click->catalog#closeMenu" } %>
