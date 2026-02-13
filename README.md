@@ -27,9 +27,13 @@ The project is built using Ruby and Ruby on Rails. It leverages Hotwire and Turb
 To run the project locally:
 
 git clone https://github.com/your-username/electroshop.git
+
 cd electroshop
+
 bundle install
+
 rails db:create db:migrate db:seed
+
 rails s
 
 
