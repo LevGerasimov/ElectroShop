@@ -14,7 +14,7 @@ module Admin
     def create
       @category = Category.new(category_params)
       if @category.save
-        redirect_to admin_category_path(@category), notice: "Категория успешно создана"
+        redirect_to admin_category_path(@category), notice: "Category created successfully"
       else
         render :new, status: :unprocessable_entity
       end
@@ -29,7 +29,7 @@ module Admin
 
     def update
       if @category.update(category_params)
-        redirect_to admin_category_path(@category), notice: "Категория успешно обновлена"
+        redirect_to admin_category_path(@category), notice: "Category updated successfully"
       else
         render :edit, status: :unprocessable_entity
       end
@@ -37,7 +37,7 @@ module Admin
 
     def destroy
       @category.destroy
-      redirect_to admin_categories_url, notice: "Категория успешно удалена"
+      redirect_to admin_categories_url, notice: "Category deleted successfully"
     end
 
     private

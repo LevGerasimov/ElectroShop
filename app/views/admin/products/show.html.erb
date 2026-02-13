@@ -8,41 +8,41 @@
   <section class="admin-header">
     <h1><%= @product.name %></h1>
     <div class="btn-group">
-      <%= link_to "Редактировать", edit_admin_product_path(@product), class: "btn btn-warning" %>
-      <%= link_to "Удалить", admin_product_path(@product), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Вы уверены?" }, class: "btn btn-danger" %>
-      <%= link_to "Назад", admin_products_path, class: "btn btn-secondary" %>
+      <%= link_to "Edit", edit_admin_product_path(@product), class: "btn btn-warning" %>
+      <%= link_to "Delete", admin_product_path(@product), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <%= link_to "Back", admin_products_path, class: "btn btn-secondary" %>
     </div>
   </section>
 
   <div class="product-details">
     <div class="detail-row">
-      <div class="detail-label">Название:</div>
+      <div class="detail-label">Name:</div>
       <div class="detail-value"><%= @product.name %></div>
     </div>
 
     <div class="detail-row">
-      <div class="detail-label">Категория:</div>
-      <div class="detail-value"><%= @product.category&.name || "Не указана" %></div>
+      <div class="detail-label">Category:</div>
+      <div class="detail-value"><%= @product.category&.name || "Not specified" %></div>
     </div>
 
     <div class="detail-row">
-      <div class="detail-label">Цена:</div>
+      <div class="detail-label">Price:</div>
       <div class="detail-value"><strong>$<%= @product.price %></strong></div>
     </div>
 
     <div class="detail-row">
-      <div class="detail-label">Количество:</div>
+      <div class="detail-label">Quantity:</div>
       <div class="detail-value"><%= @product.quantity %></div>
     </div>
 
     <div class="detail-row">
-      <div class="detail-label">Описание:</div>
+      <div class="detail-label">Description:</div>
       <div class="detail-value"><%= simple_format(@product.description) %></div>
     </div>
 
     <% if @product.image.attached? %>
       <div class="detail-row">
-        <div class="detail-label">Изображение:</div>
+        <div class="detail-label">Image:</div>
         <div class="detail-value">
           <%= image_tag @product.image, class: "product-preview-img" %>
         </div>

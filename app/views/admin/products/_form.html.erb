@@ -2,7 +2,7 @@
   <%= form_with(model: [:admin, @product], local: true) do |form| %>
     <% if @product.errors.any? %>
       <div class="alert alert-danger">
-        <h4><%= pluralize(@product.errors.count, "ошибка") %> при сохранении:</h4>
+        <h4><%= pluralize(@product.errors.count, "error") %> while saving:</h4>
         <ul>
           <% @product.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -12,34 +12,34 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :name, "Название товара" %>
-      <%= form.text_field :name, class: "form-control", placeholder: "Введите название товара" %>
+      <%= form.label :name, "Product Name" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter product name" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :description, "Описание" %>
-      <%= form.text_area :description, class: "form-control", rows: 5, placeholder: "Введите описание товара" %>
+      <%= form.label :description, "Description" %>
+      <%= form.text_area :description, class: "form-control", rows: 5, placeholder: "Enter product description" %>
     </div>
 
     <div class="form-row">
       <div class="form-group">
-        <%= form.label :price, "Цена ($)" %>
+        <%= form.label :price, "Price ($)" %>
         <%= form.number_field :price, class: "form-control", step: 0.01, placeholder: "0.00" %>
       </div>
 
       <div class="form-group">
-        <%= form.label :quantity, "Количество" %>
+        <%= form.label :quantity, "Quantity" %>
         <%= form.number_field :quantity, class: "form-control", placeholder: "0" %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= form.label :category_id, "Категория" %>
-      <%= form.select :category_id, options_for_select(@categories.map { |c| [c.name, c.id] }, @product.category_id), { include_blank: "Без категории" }, class: "form-control" %>
+      <%= form.label :category_id, "Category" %>
+      <%= form.select :category_id, options_for_select(@categories.map { |c| [c.name, c.id] }, @product.category_id), { include_blank: "No Category" }, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :image, "Изображение" %>
+      <%= form.label :image, "Image" %>
       <%= form.file_field :image, class: "form-control", accept: "image/*" %>
       <% if @product.image.attached? %>
         <div class="image-preview">
@@ -49,8 +49,8 @@
     </div>
 
     <div class="form-actions">
-      <%= form.submit "Сохранить", class: "btn btn-primary" %>
-      <%= link_to "Отмена", admin_products_path, class: "btn btn-secondary" %>
+      <%= form.submit "Save", class: "btn btn-primary" %>
+      <%= link_to "Cancel", admin_products_path, class: "btn btn-secondary" %>
     </div>
   <% end %>
 </div>

@@ -4,7 +4,7 @@
 
 <main data-controller="products">
   <section class="products-header">
-    <h1>Каталог товаров</h1>
+    <h1>Product Catalog</h1>
   </section>
 
   <div class="products-container">
@@ -18,27 +18,27 @@
             <h3><%= product.name %></h3>
             <span class="category-badge"><%= product.category&.name %></span>
             <div class="price">$<%= product.price %></div>
-            <p>Количество: <%= product.quantity %></p>
+            <p>Quantity: <%= product.quantity %></p>
             <p class="description"><%= product.description %></p>
-            <button>В корзину</button>
+            <button>Add to Cart</button>
           </div>
         <% end %>
       </section>
     <% end %>
 
     <aside class="products-sidebar">
-      <h3>Сортировка</h3>
+      <h3>Sorting</h3>
       <select id="sort" data-action="change->products#sort">
-        <option value="default">По умолчанию</option>
-        <option value="price-asc">Цена: по возрастанию</option>
-        <option value="price-desc">Цена: по убыванию</option>
-        <option value="name-asc">Название: А–Я</option>
-        <option value="name-desc">Название: Я–А</option>
+        <option value="default">Default</option>
+        <option value="price-asc">Price: Ascending</option>
+        <option value="price-desc">Price: Descending</option>
+        <option value="name-asc">Name: A-Z</option>
+        <option value="name-desc">Name: Z-A</option>
       </select>
 
-      <h3>Категории</h3>
+      <h3>Categories</h3>
       <div class="categories-list">
-        <%= link_to "Все товары", products_path, class: "category-btn #{'active' if params[:category_id].blank?}", data: { turbo_frame: "products-list" } %>
+        <%= link_to "All Products", products_path, class: "category-btn #{'active' if params[:category_id].blank?}", data: { turbo_frame: "products-list" } %>
         
         <% @categories.each do |category| %>
           <%= link_to "#{category.name} (#{category.products.count})", products_path(category_id: category.id), class: "category-btn #{'active' if params[:category_id] == category.id.to_s}", data: { turbo_frame: "products-list" } %>
